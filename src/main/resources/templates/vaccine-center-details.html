@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Vaccination Center Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Styles here */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <hr>
+    <h2 class="mt-4">Centers</h2>
+    <a href="/vaccine-centers/add" class="btn btn-primary">Add Vaccination Center</a>
+     <a href="/dashboard.html" class="btn btn-secondary">Back to Home</a><br><br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Center</th>
+          <th>City</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="vaccineCenterTableBody">
+        <!-- Loop through the vaccination centers and display their details -->
+        <tr th:each="vaccineCenter : ${vaccineCenters}">
+          <td th:text="${vaccineCenter.id}"></td>
+          <td th:text="${vaccineCenter.center}"></td>
+          <td th:text="${vaccineCenter.city}"></td>
+          <td>
+            <a th:href="@{/vaccine-centers/{id}(id=${vaccineCenter.id})}" class="btn btn-primary">View</a>
+            <a th:href="@{/vaccine-centers/{id}/edit(id=${vaccineCenter.id})}" class="btn btn-secondary">Edit</a>
+            <a th:href="@{/vaccine-centers/{id}/delete(id=${vaccineCenter.id})}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <h6 style="text-align:center ;"><strong>Total </strong><strong th:text="${#lists.size(vaccineCenters)} "></strong><strong> Vaccination Center found</strong></h6>
+  </div>
+  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

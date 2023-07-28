@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Citizen Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">Citizen Details</h1>
+    <a href="/citizens/add" class="btn btn-success">Add Citizen</a>
+    <a href="/dashboard.html" class="btn btn-secondary">Back to Home</a><br><br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>No. of Doses</th>
+          <th>Vaccination Status</th>
+          <th>Vaccination Center</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="citizen : ${citizens}">
+          <td th:text="${citizen.id}"></td>
+          <td th:text="${citizen.name}"></td>
+          <td th:text="${citizen.city}"></td>
+          <td th:text="${citizen.noOfDoses}"></td>
+          <td th:text="${citizen.vaccinationStatus}"></td>
+          <td th:text="${citizen.vaccinationCenter?.center}"></td>
+          <td>
+            <a th:href="@{/citizens/{id}(id=${citizen.id})}" class="btn btn-primary">View</a>
+            <a th:href="@{/citizens/{id}/edit(id=${citizen.id})}" class="btn btn-secondary">Edit</a>
+            <a th:href="@{/citizens/{id}/delete(id=${citizen.id})}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+     <h6 style="text-align:center ;"><strong>Total </strong><strong th:text="${#lists.size(citizens)} "></strong><strong> Citizens found</strong></h6>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

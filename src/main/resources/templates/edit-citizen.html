@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Citizen</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">Edit Citizen</h1>
+    <form th:action="@{/citizens/{id}/edit(id=${citizen.id})}" method="POST">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" th:value="${citizen.name}" required>
+      </div>
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" class="form-control" id="city" name="city" th:value="${citizen.city}" required>
+      </div>
+      <div class="form-group">
+        <label for="noOfDoses">No. of Doses:</label>
+        <select class="form-control" id="noOfDoses" name="noOfDoses" required>
+          <option value="0" th:selected="${citizen.noOfDoses == 0}">0</option>
+          <option value="1" th:selected="${citizen.noOfDoses == 1}">1</option>
+          <option value="2" th:selected="${citizen.noOfDoses == 2}">2</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="vaccinationStatus">Vaccination Status:</label>
+        <input type="text" class="form-control" id="vaccinationStatus" name="vaccinationStatus" th:value="${citizen.vaccinationStatus}" required readonly>
+      </div>
+      <div class="form-group">
+        <label for="vaccineCenterId">Vaccine Center:</label>
+        <select class="form-control" id="vaccineCenterId" name="vaccineCenterId" required>
+          <!-- Populate the options with available Vaccine Centers -->
+          <option th:each="vaccineCenter : ${vaccineCenters}" th:value="${vaccineCenter.id}" th:text="${vaccineCenter.center}" th:selected="${vaccineCenter.id == citizen.vaccinationCenter.id}"></option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Citizen</button>
+      <a href="/citizens" class="btn btn-secondary">Back</a>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const noOfDosesSelect = document.getElementById('noOfDoses');
+    const vaccinationStatusInput = document.getElementById('vaccinationStatus');
+
+    noOfDosesSelect.addEventListener('change', function() {
+      const selectedDoses = parseInt(noOfDosesSelect.value);
+
+      if (selectedDoses === 0) {
+        vaccinationStatusInput.value = 'Not Vaccinated';
+      } else if (selectedDoses === 1) {
+        vaccinationStatusInput.value = 'One Vaccinated';
+      } else if (selectedDoses === 2) {
+        vaccinationStatusInput.value = 'Fully Vaccinated';
+      }
+    });
+  </script>
+</body>
+</html>

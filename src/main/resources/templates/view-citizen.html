@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>View Citizen</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">Citizen Details</h1>
+    <div class="card">
+      <div class="card-body">
+        <p class="card-title">Name: <span th:text="${citizen.name}"></span></p>
+        <p class="card-subtitle mb-2 text-muted">City: <span th:text="${citizen.city}"></span></p>
+        <p class="card-text">No. of Doses: <span th:text="${citizen.noOfDoses}"></span></p>
+        <p class="card-text">Vaccination Status: <span th:text="${citizen.vaccinationStatus}"></span></p>
+        <p class="card-text">Vaccine Center: <span th:text="${citizen.vaccinationCenter.center}"></span></p>
+      </div>
+    </div>
+    <a href="/citizens" class="btn btn-primary mt-4">Back</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

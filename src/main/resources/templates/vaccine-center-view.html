@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Vaccination Center Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">Vaccination Center Details</h1>
+    <hr>
+    <h2 class="mt-4">Vaccination Center</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Center</th>
+          <th>City</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${vaccineCenter.id}"></td>
+          <td th:text="${vaccineCenter.center}"></td>
+          <td th:text="${vaccineCenter.city}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 class="mt-4">All Citizens of this Center</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>No. of Doses</th>
+          <th>Vaccination Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="citizen : ${citizens}">
+          <td th:text="${citizen.id}"></td>
+          <td th:text="${citizen.name}"></td>
+          <td th:text="${citizen.city}"></td>
+          <td th:text="${citizen.noOfDoses}"></td>
+          <td th:text="${citizen.vaccinationStatus}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="/vaccine-centers" class="btn btn-secondary">Back to Vaccination Centers</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
